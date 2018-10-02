@@ -6,8 +6,30 @@
 // 
 #include "projection.h"
 #include "simplex.h"
+#include "IRLB.h"
 
 using namespace arma;
+
+void IrlbaProjection::operator()(mat& x) const {
+  
+  int rank;
+  Rcpp::List decomp(5);
+    
+  decomp = IRLB(x, 102, 107);
+  arma::vec s = decomp["d"];
+  arma::mat u = decomp["u"];
+  arma::mat v = decomp["v"];
+  rank = simplex(s, d, true);
+  
+  // Reconstruct
+  x = (
+      u.cols(0, rank - 1) *
+      diagmat(s.subvec(0, rank - 1)) *
+      v.cols(0, rank - 1).t()
+  );
+  
+  return;
+}
 
 void FantopeProjection::operator()(mat& x) const {
 
@@ -21,10 +43,10 @@ void FantopeProjection::operator()(mat& x) const {
   // Reconstruct
   x = (
     eigvec.cols(eigvec.n_cols - rank, eigvec.n_cols - 1) *
-    diagmat(eigval.subvec(eigval.n_elem - rank, eigval.n_elem - 1)) *
-    eigvec.cols(eigvec.n_cols - rank, eigvec.n_cols - 1).t()
+      diagmat(eigval.subvec(eigval.n_elem - rank, eigval.n_elem - 1)) *
+      eigvec.cols(eigvec.n_cols - rank, eigvec.n_cols - 1).t()
   );
-
+  
   return;
 }
 

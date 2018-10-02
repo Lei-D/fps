@@ -13,8 +13,11 @@ Imports:
     reshape2,
     Rcpp (>= 0.11.0),
     RcppArmadillo (>= 0.4.0),
-    scales
-LinkingTo: Rcpp, RcppArmadillo
+    scales,
+    irlba
+LinkingTo: Rcpp, RcppArmadillo, irlba
 License: GPL (>= 2)
 Suggests:
     pcaPP
+RoxygenNote: 6.1.0
+Encoding: UTF-8

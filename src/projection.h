@@ -9,6 +9,15 @@
 
 #include <RcppArmadillo.h>
 
+struct IrlbaProjection {
+  
+  IrlbaProjection(double d) : d(d) {}
+  void operator()(arma::mat& x) const;
+  
+private:
+  double d;
+};
+
 struct FantopeProjection {
 
   FantopeProjection(double d) : d(d) {}

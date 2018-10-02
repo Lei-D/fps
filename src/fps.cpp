@@ -217,7 +217,7 @@ List fps(NumericMatrix S, double ndim, int nsol = 50,
     if(verbose > 0) Rcout << ".";
 
     // ADMM
-    niter[i] = admm(FantopeProjection(ndim), 
+    niter[i] = admm(IrlbaProjection(ndim), 
                     EntrywiseSoftThreshold(_lambda[i]), 
                     S_working, z, u, 
                     admm_penalty, admm_adjust,
