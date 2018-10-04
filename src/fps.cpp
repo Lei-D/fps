@@ -15,6 +15,7 @@
 #include "projection.h"
 #include "softthreshold.h"
 #include "utility.h"
+#include "Rcpp.h"
 
 using namespace Rcpp;
 using namespace arma;
@@ -148,7 +149,7 @@ void compute_lambdarange(double& lambdamin, double& lambdamax,
 //' }
 //'
 // [[Rcpp::export]]
-List fps(NumericMatrix S, double ndim, int nsol = 50, 
+List fps(NumericMatrix S, double ndim, int ncomp, int nsol = 50, 
          int maxnvar = -1, double lambdamin = -1, 
          NumericVector lambda = NumericVector::create(), 
          int maxiter = 100, double tolerance = 1e-3, int verbose = 0) {
@@ -215,9 +216,9 @@ List fps(NumericMatrix S, double ndim, int nsol = 50,
   // Outer loop to compute solution path
   for(int i = 0; i < nsol; i++) {
     if(verbose > 0) Rcout << ".";
-
+    
     // ADMM
-    niter[i] = admm(IrlbaProjection(ndim), 
+    niter[i] = admm(IrlbaProjection(ndim, ncomp), 
                     EntrywiseSoftThreshold(_lambda[i]), 
                     S_working, z, u, 
                     admm_penalty, admm_adjust,

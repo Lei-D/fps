@@ -6,7 +6,7 @@
 \alias{fps-package}
 \title{Fantope Projection and Selection}
 \usage{
-fps(S, ndim, nsol = 50L, maxnvar = -1L, lambdamin = -1,
+fps(S, ndim, ncomp, nsol = 50L, maxnvar = -1L, lambdamin = -1,
   lambda = as.numeric(c()), maxiter = 100L, tolerance = 0.001,
   verbose = 0L)
 }

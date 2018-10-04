@@ -7,13 +7,14 @@
 using namespace Rcpp;
 
 // fps
-List fps(NumericMatrix S, double ndim, int nsol, int maxnvar, double lambdamin, NumericVector lambda, int maxiter, double tolerance, int verbose);
-RcppExport SEXP _fps_fps(SEXP SSEXP, SEXP ndimSEXP, SEXP nsolSEXP, SEXP maxnvarSEXP, SEXP lambdaminSEXP, SEXP lambdaSEXP, SEXP maxiterSEXP, SEXP toleranceSEXP, SEXP verboseSEXP) {
+List fps(NumericMatrix S, double ndim, int ncomp, int nsol, int maxnvar, double lambdamin, NumericVector lambda, int maxiter, double tolerance, int verbose);
+RcppExport SEXP _fps_fps(SEXP SSEXP, SEXP ndimSEXP, SEXP ncompSEXP, SEXP nsolSEXP, SEXP maxnvarSEXP, SEXP lambdaminSEXP, SEXP lambdaSEXP, SEXP maxiterSEXP, SEXP toleranceSEXP, SEXP verboseSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type S(SSEXP);
     Rcpp::traits::input_parameter< double >::type ndim(ndimSEXP);
+    Rcpp::traits::input_parameter< int >::type ncomp(ncompSEXP);
     Rcpp::traits::input_parameter< int >::type nsol(nsolSEXP);
     Rcpp::traits::input_parameter< int >::type maxnvar(maxnvarSEXP);
     Rcpp::traits::input_parameter< double >::type lambdamin(lambdaminSEXP);
@@ -21,7 +22,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
     Rcpp::traits::input_parameter< double >::type tolerance(toleranceSEXP);
     Rcpp::traits::input_parameter< int >::type verbose(verboseSEXP);
-    rcpp_result_gen = Rcpp::wrap(fps(S, ndim, nsol, maxnvar, lambdamin, lambda, maxiter, tolerance, verbose));
+    rcpp_result_gen = Rcpp::wrap(fps(S, ndim, ncomp, nsol, maxnvar, lambdamin, lambda, maxiter, tolerance, verbose));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -44,7 +45,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_fps_fps", (DL_FUNC) &_fps_fps, 9},
+    {"_fps_fps", (DL_FUNC) &_fps_fps, 10},
     {"_fps_IRLB", (DL_FUNC) &_fps_IRLB, 7},
     {NULL, NULL, 0}
 };

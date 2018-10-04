@@ -11,11 +11,12 @@
 
 struct IrlbaProjection {
   
-  IrlbaProjection(double d) : d(d) {}
+  IrlbaProjection(double d, int ncomp) : d(d), ncomp(ncomp) {}
   void operator()(arma::mat& x) const;
   
 private:
   double d;
+  int ncomp;
 };
 
 struct FantopeProjection {

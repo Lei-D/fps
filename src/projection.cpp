@@ -7,19 +7,31 @@
 #include "projection.h"
 #include "simplex.h"
 #include "IRLB.h"
+#include "Rcpp.h"
 
+using namespace Rcpp;
 using namespace arma;
 
 void IrlbaProjection::operator()(mat& x) const {
   
   int rank;
+  int active = x.n_cols + 1;
+  int n = std::min(ncomp, active);  // data type inside std::min must be the same
   Rcpp::List decomp(5);
-    
-  decomp = IRLB(x, 102, 107);
+
+  decomp = IRLB(x, std::max(n,1), std::max(n,1)+7);
+  // cout << "ncomp";
+  // cout << std::max(n,1);
+  
   arma::vec s = decomp["d"];
   arma::mat u = decomp["u"];
   arma::mat v = decomp["v"];
-  rank = simplex(s, d, true);
+  rank = simplex(s, d);
+  
+  // cout << "eigenvalues";
+  // cout << s.subvec(0, rank-1);
+  // cout << "rank";
+  // cout << rank;
   
   // Reconstruct
   x = (

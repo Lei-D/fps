@@ -69,8 +69,8 @@
 #' print(v)
 #' }
 #'
-fps <- function(S, ndim, nsol = 50L, maxnvar = -1L, lambdamin = -1, lambda = as.numeric( c()), maxiter = 100L, tolerance = 1e-3, verbose = 0L) {
-    .Call('_fps_fps', PACKAGE = 'fps', S, ndim, nsol, maxnvar, lambdamin, lambda, maxiter, tolerance, verbose)
+fps <- function(S, ndim, ncomp, nsol = 50L, maxnvar = -1L, lambdamin = -1, lambda = as.numeric( c()), maxiter = 100L, tolerance = 1e-3, verbose = 0L) {
+    .Call('_fps_fps', PACKAGE = 'fps', S, ndim, ncomp, nsol, maxnvar, lambdamin, lambda, maxiter, tolerance, verbose)
 }
 
 IRLB <- function(X, nu, work, maxit = 1000L, tol = 1e-5, eps = 1e-9, svtol = 1e-5) {
